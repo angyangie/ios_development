@@ -7,6 +7,7 @@
 //
 
 import Foundation
+//import Realm
 
 // class because we need to be able to update!! with structs, no way to update
 class ToDo {
@@ -18,3 +19,9 @@ class ToDo {
         self.description = description
     }
 }
+
+
+//    let realm = realm
+//    let toDoItems = realm.objects(ToDo.self)
+//    print("To do items coming")
+//    print(toDoItems)

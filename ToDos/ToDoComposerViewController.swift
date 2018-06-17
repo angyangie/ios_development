@@ -9,9 +9,8 @@
 import UIKit
 
 protocol ToDoComposerDelegate: class {
-    func onNewToDo(todo: ToDo)
+    func onNewToDo(todo: ToDo) // this is the function that is clicked for us to have access
 }
-// why func declared in TODO.SWIFT?
 
 class ToDoComposerViewController: UIViewController {
     
@@ -19,44 +18,34 @@ class ToDoComposerViewController: UIViewController {
         didSet {
             titleInput.text = data?.title
             textArea.text = data?.description
-            
         }
     }
     
-//    let realm = try! Realm()
-//    let toDoItems = realm.objects(ToDo.self)
-//    print("To do items coming")
-//    print(toDoItems)
-
-    // data may exist, if not we want to clear the form
-    
-    weak var delegate: ToDoComposerDelegate?
-    // want to avoid memory leaks!! prevents this. when the counter comes by and counts all retains, if something is weak, it doesn't count it against it. When you create a memory leak, you can cause a crash.
+    weak var delegate: ToDoComposerDelegate? // want to avoid memory leaks!! prevents this.
     let titleInput = UITextField()
     let textArea = UITextView()
-    //important that they're class variables, because these will need to change!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        view.backgroundColor = .yellow
-        title = "Edit to do"
+        title = "Edit to Do"
         
+        // for joseph: why does this not work anymore????
         if navigationController == nil {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAdd)) // if presented modally
             title = "New to Do"
         }
         
+        // adding save button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAdd))
         
+        // styling for titleInput and textArea
         titleInput.placeholder = "add title here"
         titleInput.borderStyle = .roundedRect
         titleInput.textAlignment = .center
-        titleInput.frame = CGRect(x: 20, y: 70, width: view.bounds.width - 40, height: 40)
+        titleInput.frame = CGRect(x: 20, y: view.bounds.height - 300, width: view.bounds.width - 40, height: 40)
         titleInput.backgroundColor = .white
         view.addSubview(titleInput)
-        
         textArea.frame = CGRect(x: 20, y: titleInput.frame.maxY + 20, width: view.bounds.width - 40, height: 80)
         textArea.backgroundColor = .white
         view.addSubview(textArea)
@@ -65,14 +54,23 @@ class ToDoComposerViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         titleInput.becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        // Add background image to composer
+        let backgroundImage = UIImage(named: "alpha_regal")
+        let imageView = UIImageView(image: backgroundImage)
+        imageView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        self.view.addSubview(imageView)
+        self.view.sendSubview(toBack: imageView)
+
     }
     
     @objc func saveAdd() {
-        // if data exists, we'll set it to this variable. inside data guaranteed it exists
-        if let data = data {
+        if let data = data { // if data exists, set to this variable. inside data guaranteed it exists
             data.title = titleInput.text ?? ""
             data.description = textArea.text
             navigationController?.popViewController(animated: true)
@@ -88,10 +86,7 @@ class ToDoComposerViewController: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        super.didReceiveMemoryWarning() // Dispose of any resources that can be recreated.
     }
-
-
 }
 

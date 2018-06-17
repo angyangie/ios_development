@@ -1,7 +1,3 @@
-//
-//  ListTableViewController.swift
-//  ToDos
-//
 //  Created by Angela Ramirez on 5/3/18.
 //  Copyright © 2018 Angela Ramirez. All rights reserved.
 //
@@ -16,45 +12,36 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
         super.viewDidLoad()
         
         title = "My List"
-        tableView.backgroundColor = .cyan
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToDo))
-        
-        // register table view cell
         tableView.register(ToDoTableViewCell.self, forCellReuseIdentifier: ToDoTableViewCell.identifier)
-        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
-        
-    }
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "alpha_backyard")
+        let imageView = UIImageView(image: backgroundImage)
+        imageView.contentMode = .scaleAspectFill
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        // add imageView to background
+        self.tableView.backgroundView = imageView
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        // reload data
+        tableView.reloadData()
 
-    // MARK: - Table view data source
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    // number of items expected in list
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoList.count
     }
 
-    // returns cell to be displayed
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoTableViewCell.identifier, for: indexPath)
         
@@ -65,25 +52,20 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
         return cell
     }
     
-    // DELEGATE - defines functions that respond to events in the tableview. "when user taps item, or when they swipe."
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tdv = ToDoComposerViewController()
         tdv.data = toDoList[indexPath.row]
         navigationController?.pushViewController(tdv, animated: true)
-
     }
     
     func onNewToDo(todo: ToDo) {
-        toDoList.append(todo)
-        tableView.reloadData()
-        // this is so things actually appear on the page
+        toDoList.append(todo) // adding ToDo to the ToDolist
+        tableView.reloadData() // this is so things actually appear on the page
     }
     
     @objc func addToDo() {
-        print("hello!")
         let td = ToDoComposerViewController()
-        td.delegate = self
+        td.delegate = self // we are declaring THIS to be the delegate
         let nc = UINavigationController(rootViewController: td)
         present(nc, animated: true, completion: nil)
     }
@@ -94,18 +76,19 @@ class ToDoTableViewCell: UITableViewCell {
     static let identifier = "To do cell"
     var data: ToDo? {
         didSet {
-            textLabel?.text = data?.title
+            textLabel?.text = data?.title // sets the text displayed to what is stored in data!
         }
-    } // everytime data is set
+    } // everytime data is set, everytime it changes, set the data coming back to textLabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) { // UITableViewCellStyle gives you textLabel, detailTextLabel
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.backgroundColor = .red
+        backgroundColor = UIColor(white: 1, alpha: 0.5)
+        textLabel?.textColor = .white
         textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-        // any view you put into the cell, you should put in here!
+
+        // ask Joseph: why are the lines flashing?? why do they appear once I add more items?
+        
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

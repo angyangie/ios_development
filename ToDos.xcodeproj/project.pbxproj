@@ -15,7 +15,6 @@
 		9563354D209BAC7500B17370 /* ToDosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563354C209BAC7500B17370 /* ToDosUITests.swift */; };
 		9563355B209BAD3800B17370 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563355A209BAD3800B17370 /* ListTableViewController.swift */; };
 		9563355D20A4E19300B17370 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563355C20A4E19300B17370 /* ToDo.swift */; };
-		9563356120B0FFD400B17370 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563356020B0FFD400B17370 /* ToDoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		9563354E209BAC7500B17370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9563355A209BAD3800B17370 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		9563355C20A4E19300B17370 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
-		9563356020B0FFD400B17370 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +104,6 @@
 				95633533209BAC7500B17370 /* Assets.xcassets */,
 				95633535209BAC7500B17370 /* LaunchScreen.storyboard */,
 				95633538209BAC7500B17370 /* Info.plist */,
-				9563356020B0FFD400B17370 /* ToDoViewController.swift */,
 				9563355A209BAD3800B17370 /* ListTableViewController.swift */,
 				9563355C20A4E19300B17370 /* ToDo.swift */,
 			);
@@ -264,7 +261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9563356120B0FFD400B17370 /* ToDoViewController.swift in Sources */,
 				9563355B209BAD3800B17370 /* ListTableViewController.swift in Sources */,
 				9563352F209BAC7500B17370 /* ToDoComposerViewController.swift in Sources */,
 				9563352D209BAC7500B17370 /* AppDelegate.swift in Sources */,
