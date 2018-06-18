@@ -13,10 +13,12 @@ import Foundation
 class ToDo {
     var title: String
     var description: String
+    var isChecked: Bool
     
-    init (title: String, description: String) {
+    init (title: String, description: String, isChecked: Bool) {
         self.title = title
         self.description = description
+        self.isChecked = isChecked
     }
 }
 

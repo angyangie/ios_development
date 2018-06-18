@@ -13,11 +13,12 @@ protocol ToDoComposerDelegate: class {
 }
 
 class ToDoComposerViewController: UIViewController {
-    
+    var isChecked: Bool?
     var data: ToDo? {
         didSet {
             titleInput.text = data?.title
             textArea.text = data?.description
+            isChecked = data?.isChecked
         }
     }
     
@@ -46,10 +47,10 @@ class ToDoComposerViewController: UIViewController {
         titleInput.frame = CGRect(x: 20, y: view.bounds.height - 300, width: view.bounds.width - 40, height: 40)
         titleInput.backgroundColor = .white
         view.addSubview(titleInput)
+        
         textArea.frame = CGRect(x: 20, y: titleInput.frame.maxY + 20, width: view.bounds.width - 40, height: 80)
         textArea.backgroundColor = .white
         view.addSubview(textArea)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,7 +76,7 @@ class ToDoComposerViewController: UIViewController {
             data.description = textArea.text
             navigationController?.popViewController(animated: true)
         } else {
-            let new = ToDo(title: titleInput.text ?? "untitled", description: textArea.text)
+            let new = ToDo(title: titleInput.text ?? "untitled", description: textArea.text, isChecked: false)
             delegate?.onNewToDo(todo: new)
             dismiss(animated: true, completion: nil) // dismiss a modal!
         }

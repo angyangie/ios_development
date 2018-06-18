@@ -14,7 +14,6 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
         title = "My List"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToDo))
         tableView.register(ToDoTableViewCell.self, forCellReuseIdentifier: ToDoTableViewCell.identifier)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,11 +47,25 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
         if let cell = cell as? ToDoTableViewCell {
             cell.data = toDoList[indexPath.row]
         } // different kinds of cells, much more sustainable and understandable
+        
+        if toDoList[indexPath.row].isChecked  == true {
+            let checkedImage = UIImage(named: "checked")
+            
+            cell.imageView?.image = checkedImage
+        } else {
+            let unCheckedImage = UIImage(named: "unchecked")
+            cell.imageView?.image = unCheckedImage
+        }
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//       let checkBox = CheckBox()
+//       checkBox.buttonClicked(sender: self)
+        toDoList[indexPath.row].isChecked = !toDoList[indexPath.row].isChecked
+
         let tdv = ToDoComposerViewController()
         tdv.data = toDoList[indexPath.row]
         navigationController?.pushViewController(tdv, animated: true)
@@ -72,7 +85,7 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
 }
 
 class ToDoTableViewCell: UITableViewCell {
-    
+    var isChecked: Bool?
     static let identifier = "To do cell"
     var data: ToDo? {
         didSet {
@@ -87,10 +100,36 @@ class ToDoTableViewCell: UITableViewCell {
         textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
 
         // ask Joseph: why are the lines flashing?? why do they appear once I add more items?
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+//    class CheckBox: UIButton {
+//        let checkedImage = UIImage(named: "checked")
+//        let unCheckedImage = UIImage(named: "unchecked")
+//
+//        // Bool property
+//        var isChecked: Bool = false {
+//            didSet{
+//                if isChecked == true {
+//                    self.setImage(checkedImage, for: UIControlState.normal)
+//                } else {
+//                    self.setImage(unCheckedImage, for: UIControlState.normal)
+//                }
+//            }
+//        }
+//
+//        override func awakeFromNib() {
+//            self.addTarget(self, action:#selector(buttonClicked(sender:)), for: UIControlEvents.touchUpInside)
+//            self.isChecked = false
+//        }
+//
+//        @objc func buttonClicked(sender: ListTableViewController) {
+//            if sender == self {
+//                isChecked = !isChecked
+//            }
+//        }
+//    }
