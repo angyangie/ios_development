@@ -32,7 +32,7 @@ class ToDoComposerViewController: UIViewController {
         title = "Edit to Do"
         
         // for joseph: why does this not work anymore????
-        if navigationController == nil {
+        if isModal() {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAdd)) // if presented modally
             title = "New to Do"
         }
@@ -68,6 +68,12 @@ class ToDoComposerViewController: UIViewController {
         self.view.addSubview(imageView)
         self.view.sendSubview(toBack: imageView)
 
+    }
+    
+    func isModal() -> Bool {
+        return self.presentingViewController?.presentedViewController == self
+            || (self.navigationController != nil && self.navigationController?.presentingViewController?.presentedViewController == self.navigationController)
+            || self.tabBarController?.presentingViewController is UITabBarController
     }
     
     @objc func saveAdd() {

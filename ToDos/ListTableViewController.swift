@@ -14,6 +14,7 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
         title = "My List"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToDo))
         tableView.register(ToDoTableViewCell.self, forCellReuseIdentifier: ToDoTableViewCell.identifier)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,24 +48,13 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate {
         if let cell = cell as? ToDoTableViewCell {
             cell.data = toDoList[indexPath.row]
         } // different kinds of cells, much more sustainable and understandable
-        
-        if toDoList[indexPath.row].isChecked  == true {
-            let checkedImage = UIImage(named: "checked")
-            
-            cell.imageView?.image = checkedImage
-        } else {
-            let unCheckedImage = UIImage(named: "unchecked")
-            cell.imageView?.image = unCheckedImage
-        }
-
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
 //       let checkBox = CheckBox()
 //       checkBox.buttonClicked(sender: self)
-        toDoList[indexPath.row].isChecked = !toDoList[indexPath.row].isChecked
 
         let tdv = ToDoComposerViewController()
         tdv.data = toDoList[indexPath.row]
@@ -90,22 +80,44 @@ class ToDoTableViewCell: UITableViewCell {
     var data: ToDo? {
         didSet {
             textLabel?.text = data?.title // sets the text displayed to what is stored in data!
+            isChecked = data?.isChecked
         }
     } // everytime data is set, everytime it changes, set the data coming back to textLabel!
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) { // UITableViewCellStyle gives you textLabel, detailTextLabel
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor(white: 1, alpha: 0.5)
         textLabel?.textColor = .white
         textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-
-        // ask Joseph: why are the lines flashing?? why do they appear once I add more items?
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(wasTapped))
+        imageView?.addGestureRecognizer(tap)
+        // is imageVIew here???
+        updateImageObject()
+    }
+    
+    @objc func wasTapped() {
+        isChecked = !isChecked!
+        updateImageObject()
+    }
+    
+    @objc func updateImageObject() {
+        if isChecked == true {
+            let checkedImage = UIImage(named: "checked")
+            imageView?.image = checkedImage
+        } else {
+            let unCheckedImage = UIImage(named: "unchecked")
+            imageView?.image = unCheckedImage
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
+
+
 
 //    class CheckBox: UIButton {
 //        let checkedImage = UIImage(named: "checked")
