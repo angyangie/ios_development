@@ -7,19 +7,19 @@
 //
 
 import Foundation
-//import Realm
+import RealmSwift
 
 // class because we need to be able to update!! with structs, no way to update
-class ToDo {
-    var title: String
-    var description: String
-    var isChecked: Bool
+class ToDo: Object {
+//    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var title: String = ""
+    @objc dynamic var desc: String = ""
+    @objc dynamic var isChecked: Bool = false
     
-    init (title: String, description: String, isChecked: Bool) {
-        self.title = title
-        self.description = description
-        self.isChecked = isChecked
-    }
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
+    
 }
 
 

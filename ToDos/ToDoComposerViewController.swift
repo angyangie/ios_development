@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol ToDoComposerDelegate: class {
     func onNewToDo(todo: ToDo) // this is the function that is clicked for us to have access
-}
+} // guaranteed to have access to this!!
 
 class ToDoComposerViewController: UIViewController {
     var isChecked: Bool?
     var data: ToDo? {
         didSet {
             titleInput.text = data?.title
-            textArea.text = data?.description
+            textArea.text = data?.desc
             isChecked = data?.isChecked
         }
     }
@@ -31,7 +32,6 @@ class ToDoComposerViewController: UIViewController {
         
         title = "Edit to Do"
         
-        // for joseph: why does this not work anymore????
         if isModal() {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAdd)) // if presented modally
             title = "New to Do"
@@ -78,16 +78,31 @@ class ToDoComposerViewController: UIViewController {
     
     @objc func saveAdd() {
         if let data = data { // if data exists, set to this variable. inside data guaranteed it exists
-            data.title = titleInput.text ?? ""
-            data.description = textArea.text
+            let realm = try? Realm()
+            let item = realm?.objects(ToDo.self).filter("desc = '\(data.desc)'").first
+            
+            try? realm?.write {
+                item?.title = titleInput.text ?? ""
+                item?.desc = textArea.text
+            }
+            
             navigationController?.popViewController(animated: true)
         } else {
-            let new = ToDo(title: titleInput.text ?? "untitled", description: textArea.text, isChecked: false)
-            delegate?.onNewToDo(todo: new)
+            let data = ToDo()
+            data.title = titleInput.text ?? ""
+            data.desc = textArea.text
+            
+            let realm = try? Realm()
+            try? realm?.write {
+                realm?.add(data)
+            }
+            
+            delegate?.onNewToDo(todo: data)
+            
             dismiss(animated: true, completion: nil) // dismiss a modal!
         }
     }
-    
+
     @objc func cancelAdd() {
         dismiss(animated: true, completion: nil)
     }
@@ -96,4 +111,22 @@ class ToDoComposerViewController: UIViewController {
         super.didReceiveMemoryWarning() // Dispose of any resources that can be recreated.
     }
 }
+
+//class SaveData {
+//    let realm = try? Realm()
+//
+//    func saveData() {
+//        let data = ToDo()
+//        data.title = titleInput.text ?? ""
+//        data.desc = textArea.text
+//
+//        try? realm?.write {
+//            realm?.add(data)
+//        }
+//    }
+//
+//    func updateData() {
+//
+//    }
+//}
 

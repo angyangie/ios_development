@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,6 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = win
         
         // when app first shows up!
+        
+//        let realm = try? Realm()
+//
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+//
+//        let test = ToDo()
+//        test.desc = "hi"
+//        test.title = "Angie"
+//
+//
+//        try? realm?.write {
+//            realm?.add(test)
+//        }
+        
+        // HW ALL REALM STUFF ^^ YOU CAN PUT WHEREVER YOU WANT!
         
         return true
     }
