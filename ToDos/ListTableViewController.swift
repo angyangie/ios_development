@@ -3,23 +3,18 @@
 //
 
 import UIKit
-import RealmSwift
 
-class ListTableViewController: UITableViewController, ToDoComposerDelegate, ToDoTableCellDelegate {
+class ListTableViewController: UITableViewController, ToDoTableCellDelegate {
     
-    // initializing an empty array of type to do
-    var toDoList: Results<ToDo>?
+    private var toDoList: [ToDo] {
+        return DataStore.shared.toDoList
+    } //computed property
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let realm = try? Realm()
-        toDoList = realm?.objects(ToDo.self) // results
-        
         title = "My List"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToDo))
         tableView.register(ToDoTableViewCell.self, forCellReuseIdentifier: ToDoTableViewCell.identifier)
-        
     }
 
     
@@ -45,14 +40,14 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate, ToDo
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoList?.count ?? 0
+        return toDoList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoTableViewCell.identifier, for: indexPath)
         
         if let cell = cell as? ToDoTableViewCell {
-            cell.data = toDoList?[indexPath.row]
+            cell.data = toDoList[indexPath.row]
             cell.delegate = self // WOW
         } // different kinds of cells, much more sustainable and understandable
         
@@ -77,15 +72,8 @@ class ListTableViewController: UITableViewController, ToDoComposerDelegate, ToDo
     
     // HW: BUTTON, button react to changes. ButtonView. UILable....both in the content view inside the cell.
     
-    
-    func onNewToDo(todo: ToDo) {
-        tableView.reloadData() // this is so things actually appear on the page
-        // HW MAKE SEPARATE CLASS THAT'S A SINGLETON, THAT ONLY CARES ABOUT REALM. DATASTORE.
-    }
-    
     @objc func addToDo() {
         let td = ToDoComposerViewController()
-        td.delegate = self // we are declaring THIS to be the delegate
         let nc = UINavigationController(rootViewController: td)
         present(nc, animated: true, completion: nil)
     }

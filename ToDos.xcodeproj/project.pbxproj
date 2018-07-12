@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9521288E20F7D90F002C79A4 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521288D20F7D90F002C79A4 /* DataStore.swift */; };
+		9524D24C20F7E1AC00FE324A /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524D24B20F7E1AC00FE324A /* ApplicationController.swift */; };
 		9563352D209BAC7500B17370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563352C209BAC7500B17370 /* AppDelegate.swift */; };
 		9563352F209BAC7500B17370 /* ToDoComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563352E209BAC7500B17370 /* ToDoComposerViewController.swift */; };
 		95633534209BAC7500B17370 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95633533209BAC7500B17370 /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9521288D20F7D90F002C79A4 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		9524D24B20F7E1AC00FE324A /* ApplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
 		952668C020E56820000B1BE0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		952668C420E56828000B1BE0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		95633529209BAC7500B17370 /* ToDos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +130,8 @@
 			children = (
 				9563352C209BAC7500B17370 /* AppDelegate.swift */,
 				9563352E209BAC7500B17370 /* ToDoComposerViewController.swift */,
+				9524D24B20F7E1AC00FE324A /* ApplicationController.swift */,
+				9521288D20F7D90F002C79A4 /* DataStore.swift */,
 				95633533209BAC7500B17370 /* Assets.xcassets */,
 				95633535209BAC7500B17370 /* LaunchScreen.storyboard */,
 				95633538209BAC7500B17370 /* Info.plist */,
@@ -305,9 +311,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9524D24C20F7E1AC00FE324A /* ApplicationController.swift in Sources */,
 				9563355B209BAD3800B17370 /* ListTableViewController.swift in Sources */,
 				9563352F209BAC7500B17370 /* ToDoComposerViewController.swift in Sources */,
 				9563352D209BAC7500B17370 /* AppDelegate.swift in Sources */,
+				9521288E20F7D90F002C79A4 /* DataStore.swift in Sources */,
 				9563355D20A4E19300B17370 /* ToDo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,11 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
-
-protocol ToDoComposerDelegate: class {
-    func onNewToDo(todo: ToDo) // this is the function that is clicked for us to have access
-} // guaranteed to have access to this!!
 
 class ToDoComposerViewController: UIViewController {
     var isChecked: Bool?
@@ -22,8 +17,6 @@ class ToDoComposerViewController: UIViewController {
             isChecked = data?.isChecked
         }
     }
-    
-    weak var delegate: ToDoComposerDelegate? // want to avoid memory leaks!! prevents this.
     let titleInput = UITextField()
     let textArea = UITextView()
     
@@ -78,27 +71,14 @@ class ToDoComposerViewController: UIViewController {
     
     @objc func saveAdd() {
         if let data = data { // if data exists, set to this variable. inside data guaranteed it exists
-            let realm = try? Realm()
-            let item = realm?.objects(ToDo.self).filter("desc = '\(data.desc)'").first
-            
-            try? realm?.write {
-                item?.title = titleInput.text ?? ""
-                item?.desc = textArea.text
-            }
-            
+            DataStore.shared.update(toDo: data, title: titleInput.text ?? "", description: textArea.text)
             navigationController?.popViewController(animated: true)
         } else {
             let data = ToDo()
             data.title = titleInput.text ?? ""
             data.desc = textArea.text
             
-            let realm = try? Realm()
-            try? realm?.write {
-                realm?.add(data)
-            }
-            
-            delegate?.onNewToDo(todo: data)
-            
+            DataStore.shared.add(toDo: data)
             dismiss(animated: true, completion: nil) // dismiss a modal!
         }
     }
@@ -109,24 +89,6 @@ class ToDoComposerViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning() // Dispose of any resources that can be recreated.
+//        DataStore.shared
     }
 }
-
-//class SaveData {
-//    let realm = try? Realm()
-//
-//    func saveData() {
-//        let data = ToDo()
-//        data.title = titleInput.text ?? ""
-//        data.desc = textArea.text
-//
-//        try? realm?.write {
-//            realm?.add(data)
-//        }
-//    }
-//
-//    func updateData() {
-//
-//    }
-//}
-

@@ -19,28 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let win = UIWindow()
         win.frame = UIScreen.main.bounds
-        //        win.rootViewController = ViewController()
-        win.rootViewController = UINavigationController(rootViewController: ListTableViewController())
+        win.rootViewController = ApplicationController.shared.navigationController
         // viewcontroller can exist as a part of a view hierarchy...could be modal
         win.makeKeyAndVisible()
         window = win
         
-        // when app first shows up!
-        
-//        let realm = try? Realm()
-//
         print(Realm.Configuration.defaultConfiguration.fileURL)
-//
-//        let test = ToDo()
-//        test.desc = "hi"
-//        test.title = "Angie"
-//
-//
-//        try? realm?.write {
-//            realm?.add(test)
-//        }
-        
-        // HW ALL REALM STUFF ^^ YOU CAN PUT WHEREVER YOU WANT!
         
         return true
     }
