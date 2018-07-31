@@ -58,6 +58,9 @@ class ToDoComposerViewController: UIViewController {
         let backgroundImage = UIImage(named: "alpha_regal")
         let imageView = UIImageView(image: backgroundImage)
         imageView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+//        imageView.contentMode = .scaleAspectFill
+//        imageView.backgroundColor = .red
+        
         self.view.addSubview(imageView)
         self.view.sendSubview(toBack: imageView)
 
@@ -71,7 +74,7 @@ class ToDoComposerViewController: UIViewController {
     
     @objc func saveAdd() {
         if let data = data { // if data exists, set to this variable. inside data guaranteed it exists
-            DataStore.shared.update(toDo: data, title: titleInput.text ?? "", description: textArea.text)
+            DataStore.shared.update(toDo: data, title: titleInput.text ?? "", description: textArea.text, isChecked: nil)
             navigationController?.popViewController(animated: true)
         } else {
             let data = ToDo()

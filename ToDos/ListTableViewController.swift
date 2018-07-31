@@ -53,6 +53,10 @@ class ListTableViewController: UITableViewController, ToDoTableCellDelegate {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //
@@ -86,29 +90,55 @@ protocol ToDoTableCellDelegate: class { // be able to associate with class objec
 class ToDoTableViewCell: UITableViewCell {
     weak var delegate: ToDoTableCellDelegate?
     
-    var isChecked: Bool?
+    var isChecked = false {
+        didSet {
+            if isChecked {
+                checkboxButton.setImage(#imageLiteral(resourceName: "checked"), for: .normal)
+            } else {
+                checkboxButton.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
+            }
+            if let data = data {
+                DataStore.shared.update(toDo: data, title: nil, description: nil, isChecked: isChecked)
+            }
+        }
+    }
     static let identifier = "To do cell"
     var data: ToDo? {
         didSet {
-            textLabel?.text = data?.title // sets the text displayed to what is stored in data!
-            isChecked = data?.isChecked
+            button.setTitle(data?.title, for: .normal) // sets the text displayed to what is stored in data!
+            isChecked = data?.isChecked ?? false
         }
     } // everytime data is set, everytime it changes, set the data coming back to textLabel!
     
     let button = UIButton() // subview of UIview, backgroundView, imageView
-
+    let checkboxButton = UIButton()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) { // UITableViewCellStyle gives you textLabel, detailTextLabel
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor(white: 1, alpha: 0.5)
-        textLabel?.textColor = .white
-        textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
+//        textLabel?.textColor = .white
+//        textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
+        
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        
+        checkboxButton.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
 
         contentView.addSubview(button)
-        
         button.addTarget(self, action: #selector(goToComposer), for: .touchUpInside)
+        
+        contentView.addSubview(checkboxButton)
+        checkboxButton.backgroundColor = .red
+        checkboxButton.addTarget(self, action: #selector(onCheckBoxClick), for: .touchUpInside)
         
         // is imageVIew here???
 //        updateImageObject()
+    }
+    
+    @objc func onCheckBoxClick() {
+        isChecked = !isChecked
     }
     
     @objc func goToComposer() {
@@ -130,7 +160,9 @@ class ToDoTableViewCell: UITableViewCell {
     
     override func layoutSubviews() { // called when the view first comes in, when it comes out, when scrolling...when things need to be resized, etc. Don't want to put a lot of logic here
         super.layoutSubviews()
-        button.frame = contentView.bounds
+        checkboxButton.frame = CGRect(x: 0, y: 0, width: contentView.bounds.height, height: contentView.bounds.height)
+        button.frame = CGRect(x: contentView.bounds.height, y: 0, width: contentView.bounds.width - contentView.bounds.height, height: contentView.bounds.height)
+        
         
     }
     
@@ -178,3 +210,5 @@ class ToDoTableViewCell: UITableViewCell {
 //            }
 //        }
 //    }
+
+// making things transparent,adding checkbutton to composer

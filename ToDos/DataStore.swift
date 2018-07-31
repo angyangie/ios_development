@@ -34,11 +34,21 @@ class DataStore { // singleton, accessible from anywhere in your app!! in genera
         }
     }
     
-    func update(toDo: ToDo, title: String, description: String) {
+    func update(toDo: ToDo, title: String?, description: String?, isChecked: Bool?) {
         guard let realm = realm else { return }
         try? realm.write {
-            toDo.title = title
-            toDo.desc = description
+            if let title = title {
+                toDo.title = title
+            }
+            
+            if let description = description {
+                toDo.desc = description
+            }
+            
+            if let isChecked = isChecked {
+                toDo.isChecked = isChecked
+            }
+            
         }
     } // update struct could be an option
 }
