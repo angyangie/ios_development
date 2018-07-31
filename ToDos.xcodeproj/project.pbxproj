@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9521288E20F7D90F002C79A4 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521288D20F7D90F002C79A4 /* DataStore.swift */; };
+		9524D24C20F7E1AC00FE324A /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524D24B20F7E1AC00FE324A /* ApplicationController.swift */; };
 		9563352D209BAC7500B17370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563352C209BAC7500B17370 /* AppDelegate.swift */; };
 		9563352F209BAC7500B17370 /* ToDoComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563352E209BAC7500B17370 /* ToDoComposerViewController.swift */; };
 		95633534209BAC7500B17370 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95633533209BAC7500B17370 /* Assets.xcassets */; };
@@ -15,6 +17,10 @@
 		9563354D209BAC7500B17370 /* ToDosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563354C209BAC7500B17370 /* ToDosUITests.swift */; };
 		9563355B209BAD3800B17370 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563355A209BAD3800B17370 /* ListTableViewController.swift */; };
 		9563355D20A4E19300B17370 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563355C20A4E19300B17370 /* ToDo.swift */; };
+		9597C77B20E5692C008D7119 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952668C420E56828000B1BE0 /* RealmSwift.framework */; };
+		9597C77C20E5692C008D7119 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 952668C420E56828000B1BE0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9597C77D20E5692C008D7119 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952668C020E56820000B1BE0 /* Realm.framework */; };
+		9597C77E20E5692C008D7119 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 952668C020E56820000B1BE0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +40,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9597C77F20E5692C008D7119 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9597C77E20E5692C008D7119 /* Realm.framework in Embed Frameworks */,
+				9597C77C20E5692C008D7119 /* RealmSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9521288D20F7D90F002C79A4 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		9524D24B20F7E1AC00FE324A /* ApplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
+		952668C020E56820000B1BE0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		952668C420E56828000B1BE0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		95633529209BAC7500B17370 /* ToDos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9563352C209BAC7500B17370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9563352E209BAC7500B17370 /* ToDoComposerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoComposerViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9597C77D20E5692C008D7119 /* Realm.framework in Frameworks */,
+				9597C77B20E5692C008D7119 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +106,8 @@
 		95633520209BAC7500B17370 = {
 			isa = PBXGroup;
 			children = (
+				952668C420E56828000B1BE0 /* RealmSwift.framework */,
+				952668C020E56820000B1BE0 /* Realm.framework */,
 				9563352B209BAC7500B17370 /* ToDos */,
 				95633540209BAC7500B17370 /* ToDosTests */,
 				9563354B209BAC7500B17370 /* ToDosUITests */,
@@ -101,6 +130,8 @@
 			children = (
 				9563352C209BAC7500B17370 /* AppDelegate.swift */,
 				9563352E209BAC7500B17370 /* ToDoComposerViewController.swift */,
+				9524D24B20F7E1AC00FE324A /* ApplicationController.swift */,
+				9521288D20F7D90F002C79A4 /* DataStore.swift */,
 				95633533209BAC7500B17370 /* Assets.xcassets */,
 				95633535209BAC7500B17370 /* LaunchScreen.storyboard */,
 				95633538209BAC7500B17370 /* Info.plist */,
@@ -138,6 +169,8 @@
 				95633525209BAC7500B17370 /* Sources */,
 				95633526209BAC7500B17370 /* Frameworks */,
 				95633527209BAC7500B17370 /* Resources */,
+				9597C77A20E568B8008D7119 /* ShellScript */,
+				9597C77F20E5692C008D7119 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,14 +289,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9597C77A20E568B8008D7119 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		95633525209BAC7500B17370 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9524D24C20F7E1AC00FE324A /* ApplicationController.swift in Sources */,
 				9563355B209BAD3800B17370 /* ListTableViewController.swift in Sources */,
 				9563352F209BAC7500B17370 /* ToDoComposerViewController.swift in Sources */,
 				9563352D209BAC7500B17370 /* AppDelegate.swift in Sources */,
+				9521288E20F7D90F002C79A4 /* DataStore.swift in Sources */,
 				9563355D20A4E19300B17370 /* ToDo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +475,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ToDos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.angie.ToDos;
@@ -437,6 +493,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ToDos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.angie.ToDos;

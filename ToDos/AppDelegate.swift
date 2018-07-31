@@ -7,25 +7,24 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         let win = UIWindow()
         win.frame = UIScreen.main.bounds
-        //        win.rootViewController = ViewController()
-        win.rootViewController = UINavigationController(rootViewController: ListTableViewController())
+        win.rootViewController = ApplicationController.shared.navigationController
         // viewcontroller can exist as a part of a view hierarchy...could be modal
         win.makeKeyAndVisible()
         window = win
         
-        // when app first shows up!
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         return true
     }
